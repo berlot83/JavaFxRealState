@@ -1,0 +1,57 @@
+
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+/* Main from centerLayout */
+.hBoxTable {
+	-fx-background-image: url("../img/backgroundYellow.png");
+}
+
+/* Main from topLayout */
+.hBoxTitle{
+	-fx-background-image: url("../img/headerLinesGray.png");
+}
+
+/* Main from bottomLayout */
+.hbox{
+	-fx-background-image: url("../img/footerGray.png");	
+}
+
+/* All buttons color */
+Button{
+	-fx-background-color: white;
+}
+
+/*FamilyStage headerLayout */
+.stackPane{
+	-fx-background-image: url("../img/backgroundStarGray.png");
+}
+
+/* FamilyStage half from centerLayout */
+.vBox{
+		-fx-background-image: url("../img/backgroundYellowLines.png");	
+}
+
+/* FamilyStage half from centerLayout */
+.vBox1{
+		-fx-background-image: url("../img/backgroundYellowLines1.png");	
+}
+
+/* FamilyStage from bottomLayout */
+.hboxFamilyStage{
+	-fx-background-image: url("../img/footerGreen.png");	
+}
+
+/* Main repair Stage topPanel */
+.topPanel{
+	-fx-background-image: url("../img/headerLinesGray.png");
+}
+
+/* Main repair Stage centerLayout */
+.centralPanel{
+		-fx-background-image: url("../img/backgroundYellow.png");
+}
+
+/* Main repair Stage bottomLayout */
+.repairButtonLayout{
+		-fx-background-image: url("../img/footerGreen.png");
+}

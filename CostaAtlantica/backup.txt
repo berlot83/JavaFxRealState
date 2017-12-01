@@ -1,0 +1,6 @@
+Backup Fecha y hora= 2017-11-30T18:30:54.375, Family [id=0, lastname=Gerso, address=Mariano moreno 4562, telephone=46021361, cbu=1234567894561236547896, quantity=1, fromDate=2017-11-07, toDate=2017-11-23, reservation=4600.0]
+
+Backup Fecha y hora= 2017-11-30T18:31:38.055, Family [id=0, lastname=Maldon, address=Soomeo, telephone=45612345, cbu=1234567896541236589632, quantity=2, fromDate=2017-11-01, toDate=2017-11-24, reservation=4500.0]
+
+Backup Fecha y hora= 2017-11-30T18:32:20.598, Family [id=0, lastname=Opel, address=Solange, telephone=460256989, cbu=7894561232145678963214, quantity=5, fromDate=2017-11-14, toDate=2017-12-02, reservation=6500.0]
+
