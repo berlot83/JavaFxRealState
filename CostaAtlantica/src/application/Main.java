@@ -12,6 +12,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.print.PageLayout;
+import javafx.print.PageOrientation;
+import javafx.print.Paper;
+import javafx.print.Printer;
+import javafx.print.PrinterJob;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.Node;
@@ -30,11 +35,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-
+import javafx.scene.transform.Scale;
 
 public class Main extends Application {
 
-	private Button btnAddFamily, btnUpdate, btnDelete, btnRepair, btnPrint, btnFile;
+	private Button btnAddFamily, btnUpdate, btnDelete, btnRepair, btnPrint, btnFile, btnExit;
 	private Label logoLabel;
 	private TableView<Family> table;
 	private TableView<House> houseTable;
@@ -42,7 +47,7 @@ public class Main extends Application {
 			toDateColumn;
 	private TableColumn<House, String> nameColumn, actionColumn, descriptionColumn;
 	private TableColumn<Family, Double> reservationColumn;
-	private TableColumn<Family, Integer> idColumn, quantityColumn, idHouseColumn;
+	private TableColumn<Family, Integer> idColumn, quantityColumn, idHouseColumn, lapseColumn;
 	private TableColumn<House, Integer> idRepairColumn;
 	private Alert alert;
 
@@ -68,7 +73,7 @@ public class Main extends Application {
 			hBoxTable.getStyleClass().add("hBoxTable");
 
 			table = new TableView<Family>();
-			table.setMinWidth(1000);
+			table.setMinWidth(1070);
 
 			idColumn = new TableColumn<Family, Integer>("id");
 			idColumn.setCellValueFactory(new PropertyValueFactory<>("sipId"));
@@ -85,7 +90,7 @@ public class Main extends Application {
 			cbuColumn = new TableColumn<Family, String>("CBU");
 			cbuColumn.setCellValueFactory(new PropertyValueFactory<>("sspCbu"));
 
-			quantityColumn = new TableColumn<Family, Integer>("Cantidad de Personas");
+			quantityColumn = new TableColumn<Family, Integer>("C.de Personas");
 			quantityColumn.setCellValueFactory(new PropertyValueFactory<>("sspQuantity"));
 
 			fromDateColumn = new TableColumn<Family, String>("Desde");
@@ -93,6 +98,9 @@ public class Main extends Application {
 
 			toDateColumn = new TableColumn<Family, String>("Hasta");
 			toDateColumn.setCellValueFactory(new PropertyValueFactory<>("sspToDate"));
+
+			lapseColumn = new TableColumn<Family, Integer>("Estadía en YY / MM / dd");
+			lapseColumn.setCellValueFactory(new PropertyValueFactory<>("sipLapse"));
 
 			reservationColumn = new TableColumn<Family, Double>("Depósito de Reserva");
 			reservationColumn.setCellValueFactory(new PropertyValueFactory<>("sspReservation"));
@@ -102,7 +110,7 @@ public class Main extends Application {
 
 			table.setItems(getAllFamilyData());
 			table.getColumns().addAll(idColumn, lastnameColumn, addressColumn, telephoneColumn, cbuColumn,
-					quantityColumn, fromDateColumn, toDateColumn, reservationColumn, idHouseColumn);
+					quantityColumn, fromDateColumn, toDateColumn, lapseColumn, reservationColumn, idHouseColumn);
 
 			hBoxTable.getChildren().addAll(table);
 
@@ -122,21 +130,28 @@ public class Main extends Application {
 			btnPrint = new Button("Imprimir", new ImageView(printerIcon));
 
 			Image backupIcon = new Image(getClass().getResourceAsStream("../img/backupFile.png"));
-			
 			btnFile = new Button("Abrir Backup", new ImageView(backupIcon));
+
+			Image exitIcon = new Image(getClass().getResourceAsStream("../img/exit.png"));
+			btnExit = new Button("Salir", new ImageView(exitIcon));
 
 			HBox hbox = new HBox();
 			hbox.setPadding(new Insets(5, 5, 5, 5));
 			hbox.setSpacing(15);
 			hbox.setId("hbox");
 			hbox.getStyleClass().add("hbox");
-			hbox.getChildren().addAll(btnAddFamily, btnUpdate, btnDelete, btnRepair, btnPrint, btnFile);
+			hbox.getChildren().addAll(btnAddFamily, btnUpdate, btnDelete, btnRepair, btnPrint, btnFile, btnExit);
 			BorderPane borderLayout = new BorderPane(hBoxTable, hBoxTitle, null, hbox, null);
-			Scene scene = new Scene(borderLayout, 1050, 600);
+			Scene scene = new Scene(borderLayout, 1100, 600);
 
 			btnAddFamily.setOnAction(event -> {
 				FamilyStage hs = new FamilyStage();
 				hs.getFrame().show();
+			});
+
+			/* Exit Button */
+			btnExit.setOnAction(event -> {
+				System.exit(0);
 			});
 
 			/* Open new Frame, on add new Family */
@@ -163,7 +178,7 @@ public class Main extends Application {
 				} catch (IOException error) {
 					error.printStackTrace();
 				}
-				
+
 			});
 
 			btnPrint.setOnAction(event -> {
@@ -183,7 +198,7 @@ public class Main extends Application {
 				centralPanel.setPadding(new Insets(10, 10, 10, 10));
 				centralPanel.setId("centralPanel");
 				centralPanel.getStyleClass().add("centralPanel");
-				
+
 				TableView<House> tableRepair = tableRepair();
 				tableRepair.setItems(getAllRepairData());
 				tableRepair.getColumns().addAll(idRepairColumn, nameColumn, actionColumn, descriptionColumn);
@@ -211,12 +226,11 @@ public class Main extends Application {
 
 				Image plusIcon = new Image(getClass().getResourceAsStream("../img/plusIcon.png"));
 				Button btnAddRepair = new Button("Agregar", new ImageView(plusIcon));
-				
 
 				Image deleteIconRepair = new Image(getClass().getResourceAsStream("../img/deleteIcon.png"));
 				Button btnDelete = new Button("Eliminar", new ImageView(deleteIconRepair));
-				
-				btnDelete.setOnAction(event1 ->{
+
+				btnDelete.setOnAction(event1 -> {
 
 					ObservableList<House> selectedItem;
 					selectedItem = tableRepair.getSelectionModel().getSelectedItems();
@@ -226,7 +240,7 @@ public class Main extends Application {
 						hf.deleteRepair(selectedItem.get(0).getId());
 						tableRepair.getColumns().clear();
 						tableRepair.setItems(getAllRepairData());
-						tableRepair.getColumns().addAll(idRepairColumn, nameColumn, actionColumn, descriptionColumn );
+						tableRepair.getColumns().addAll(idRepairColumn, nameColumn, actionColumn, descriptionColumn);
 					} catch (Exception error) {
 
 						alert = new Alert(Alert.AlertType.WARNING);
@@ -238,7 +252,7 @@ public class Main extends Application {
 						alert.showAndWait();
 					}
 				});
-				
+
 				btnAddRepair.setOnAction(new EventHandler<ActionEvent>() {
 
 					@Override
@@ -256,10 +270,11 @@ public class Main extends Application {
 				});
 
 				BorderPane borderPane = new BorderPane(centralPanel, topPanel, null, repairButtonLayout, null);
-				Scene panel = new Scene(borderPane, 850, 400);
+				Scene panel = new Scene(borderPane, 1100, 400);
 				Stage stage = new Stage();
 				stage.setTitle("Administrador de reparaciones");
 				stage.setScene(panel);
+				stage.getIcons().add(new Image(getClass().getResourceAsStream("../img/home.png")));
 				stage.show();
 
 				Image backIcon = new Image(getClass().getResourceAsStream("../img/backIcon.png"));
@@ -284,7 +299,8 @@ public class Main extends Application {
 					table.getColumns().clear();
 					table.setItems(getAllFamilyData());
 					table.getColumns().addAll(idColumn, lastnameColumn, addressColumn, telephoneColumn, cbuColumn,
-							quantityColumn, fromDateColumn, toDateColumn, reservationColumn, idHouseColumn);
+							quantityColumn, fromDateColumn, toDateColumn, lapseColumn, reservationColumn,
+							idHouseColumn);
 
 				} catch (Exception error) {
 
@@ -304,11 +320,12 @@ public class Main extends Application {
 				table.getColumns().clear();
 				table.setItems(getAllFamilyData());
 				table.getColumns().addAll(idColumn, lastnameColumn, addressColumn, telephoneColumn, cbuColumn,
-						quantityColumn, fromDateColumn, toDateColumn, reservationColumn, idHouseColumn);
+						quantityColumn, fromDateColumn, toDateColumn, lapseColumn, reservationColumn, idHouseColumn);
 			});
 
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
+			primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("../img/home.png")));
 			primaryStage.setTitle("Administración de alquileres en la Costa Atlántica");
 			primaryStage.show();
 		} catch (Exception e) {
@@ -365,28 +382,27 @@ public class Main extends Application {
 	}
 
 	private void print(Node node) {
-		// PrinterJob pj = PrinterJob.createPrinterJob();
-		// pj.getPrinter();
-		// pj.getJobSettings();
-		// pj.printPage(new TextArea("Esto es una prueba si imprime o no"));
-		// pj.endJob();
-		//
-		// Printer printer = Printer.getDefaultPrinter();
-		// PageLayout pageLayout = printer.createPageLayout(Paper.NA_LETTER,
-		// PageOrientation.PORTRAIT, Printer.MarginType.DEFAULT);
-		// double scaleX = node.getBoundsInParent().getWidth();
-		// double scaleY = node.getBoundsInParent().getHeight();
-		// node.getTransforms().add(new Scale(scaleX, scaleY));
-		//
-		// PrinterJob job = PrinterJob.createPrinterJob();
-		// if (job != null) {
-		// job.printPage(node);
-		// boolean success = job.printPage(node);
-		// if (success) {
-		// job.endJob();
-		// }
-		// }
+		PrinterJob pj = PrinterJob.createPrinterJob();
+		pj.getPrinter();
+		pj.getJobSettings();
+		pj.printPage(node);
+		pj.endJob();
 
+		Printer printer = Printer.getDefaultPrinter();
+		PageLayout pageLayout = printer.createPageLayout(Paper.NA_LETTER, PageOrientation.PORTRAIT,
+				Printer.MarginType.DEFAULT);
+		double scaleX = pageLayout.getPrintableWidth();
+		double scaleY = pageLayout.getPrintableHeight();
+		node.getTransforms().add(new Scale(scaleX, scaleY));
+
+		PrinterJob job = PrinterJob.createPrinterJob();
+		if (job != null) {
+			job.printPage(node);
+			boolean success = job.printPage(node);
+			if (success) {
+				job.endJob();
+			}
+		}
 	}
 
 	/* Launcher of the proyect, not seems to be mandatory but yes test on IDE */

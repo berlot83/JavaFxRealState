@@ -133,6 +133,7 @@ public class FamilyStage {
 
 			primaryStage = new Stage();
 			primaryStage.setTitle("Ingresar nuevo/s inquilinos");
+			primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("../img/home.png")));
 			primaryStage.setScene(scene);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
@@ -149,7 +150,7 @@ public class FamilyStage {
 						
 
 						
-						Family f = new Family(lastname.getText(), address.getText(), telephone.getText(), cbu.getText(), Integer.parseInt(quantity.getText()), fromDate.getValue(), toDate.getValue(), Double.parseDouble(reservation.getText()));
+						Family f = new Family(lastname.getText(), address.getText(), telephone.getText(), cbu.getText(), Integer.parseInt(quantity.getText()), fromDate.getValue(), toDate.getValue(),0,  Double.parseDouble(reservation.getText()));
 						BackupFile b = new BackupFile();
 						b.saveFile(f.toString());
 						

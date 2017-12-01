@@ -4,3 +4,31 @@ Backup Fecha y hora= 2017-11-30T18:31:38.055, Family [id=0, lastname=Maldon, add
 
 Backup Fecha y hora= 2017-11-30T18:32:20.598, Family [id=0, lastname=Opel, address=Solange, telephone=460256989, cbu=7894561232145678963214, quantity=5, fromDate=2017-11-14, toDate=2017-12-02, reservation=6500.0]
 
+Backup Fecha y hora= 2017-11-30T22:16:46.887, Family [id=0, lastname=Chapo, address=qwe, telephone=qqwe, cbu=1234567896321478963214, quantity=2, fromDate=2017-11-01, toDate=2017-11-16, reservation=789.0]
+
+Backup Fecha y hora= 2017-11-30T22:38:29.539, Family [id=0, lastname=wefsdf, address=sdfsdf, telephone=sdf, cbu=1234567896321478963214, quantity=2, fromDate=2017-10-30, toDate=2017-12-10, reservation=234.0]
+
+Backup Fecha y hora= 2017-11-30T22:40:46.505, Family [id=0, lastname=io, address=io, telephone=ioi, cbu=1234567896321478963214, quantity=2, fromDate=2017-10-30, toDate=2017-12-02, reservation=89.0]
+
+Backup Fecha y hora= 2017-11-30T22:41:55.174, Family [id=0, lastname=sd, address=sd, telephone=sd, cbu=1234567896321456987456, quantity=1, fromDate=2017-11-01, toDate=2017-11-17, reservation=12.0]
+
+Backup Fecha y hora= 2017-11-30T22:50:42.404, Family [id=0, lastname=xc, address=xc, telephone=xc, cbu=1234567896321456987456, quantity=34, fromDate=2017-10-30, toDate=2017-12-10, reservation=1234.0]
+
+Backup Fecha y hora= 2017-11-30T23:05:31.781, Family [id=0, lastname=asd, address=asd, telephone=asd, cbu=1236547896547896545698, quantity=2, fromDate=2017-10-01, toDate=2017-11-30, reservation=56.0]
+
+Backup Fecha y hora= 2017-11-30T23:06:46.293, Family [id=0, lastname=qwe, address=qwe, telephone=qwe, cbu=1236547896547896545698, quantity=23, fromDate=2017-11-01, toDate=2017-11-30, reservation=23.0]
+
+Backup Fecha y hora= 2017-11-30T23:07:52.509, Family [id=0, lastname=er, address=er, telephone=er, cbu=1236547896547896545698, quantity=3, fromDate=2017-09-05, toDate=2017-12-10, reservation=2.0]
+
+Backup Fecha y hora= 2017-11-30T23:14:55.660, Family [id=0, lastname=as, address=as, telephone=as, cbu=1478523698523698523698, quantity=2, fromDate=2017-08-29, toDate=2017-12-10, reservation=56.0]
+
+Backup Fecha y hora= 2017-11-30T23:17:43.785, Family [id=0, lastname=Pepon, address=Acacias, telephone=15423654, cbu=1234567896321456987456, quantity=1, fromDate=2017-04-11, toDate=2017-12-10, reservation=34.0]
+
+Backup Fecha y hora= 2017-11-30T23:21:52.942, Family [id=0, lastname=Ramon, address=Av de mayo 450, telephone=156000988, cbu=1234567896541236547896, quantity=2, fromDate=2017-10-30, toDate=2017-12-02, reservation=12333.0]
+
+Backup Fecha y hora= 2017-11-30T23:24:47.691, Family [id=0, lastname=qwe, address=qwe, telephone=qwe, cbu=1234569874563214569874, quantity=2, fromDate=2017-10-30, toDate=2017-12-03, reservation=222.0]
+
+Backup Fecha y hora= 2017-11-30T23:27:20.271, Family [id=0, lastname=we, address=we, telephone=we, cbu=1523654789632145698745, quantity=3, fromDate=2017-11-10, toDate=2017-11-20, reservation=3.0]
+
+Backup Fecha y hora= 2017-11-30T23:32:06.342Family [id=0, lastname=Gonzalez, address=Pinzon, telephone=15236541, cbu=1234567894561236547896, quantity=3, fromDate=2017-11-10, toDate=2017-11-30, lapse=0, reservation=1563.0]
+

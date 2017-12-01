@@ -17,6 +17,7 @@ public class Family {
 	private int quantity;
 	private LocalDate fromDate;
 	private LocalDate toDate;
+	private int lapse;
 	private double reservation;
 	
 	private SimpleIntegerProperty sipId;
@@ -27,10 +28,11 @@ public class Family {
 	private SimpleIntegerProperty sspQuantity;
 	private SimpleStringProperty sspFromDate;
 	private SimpleStringProperty sspToDate;
+	private SimpleStringProperty sipLapse;
 	private SimpleDoubleProperty sspReservation;
 	private SimpleStringProperty sspHouse;
 		
-	public Family(int sipId, String sspLastname, String sspAddress, String sspTelephone, String sspCbu, int sspQuantity, String sspFromDate, String sspToDate, double sspReservation, String sspHouse ) {
+	public Family(int sipId, String sspLastname, String sspAddress, String sspTelephone, String sspCbu, int sspQuantity, String sspFromDate, String sspToDate, String sipLapse, double sspReservation, String sspHouse ) {
 		this.sipId = new SimpleIntegerProperty(sipId);
 		this.sspLastname = new SimpleStringProperty(sspLastname);
 		this.sspAddress = new SimpleStringProperty(sspAddress);
@@ -39,13 +41,14 @@ public class Family {
 		this.sspQuantity = new SimpleIntegerProperty(sspQuantity);
 		this.sspFromDate = new SimpleStringProperty(sspFromDate);
 		this.sspToDate = new SimpleStringProperty(sspToDate);
+		this.sipLapse = new SimpleStringProperty(sipLapse);
 		this.sspReservation = new SimpleDoubleProperty(sspReservation);
 		this.sspHouse = new SimpleStringProperty(sspHouse);
 	}
 	
 
 	public Family(String lastname, String address, String telephone, String cbu, int quantity, LocalDate fromDate,
-			LocalDate toDate, double reservation) {
+			LocalDate toDate, int lapse, double reservation) {
 		super();
 		this.lastname = lastname;
 		this.address = address;
@@ -54,6 +57,7 @@ public class Family {
 		this.quantity = quantity;
 		this.fromDate = fromDate;
 		this.toDate = toDate;
+		this.lapse = lapse;
 		this.reservation = reservation;
 	}
 
@@ -119,6 +123,14 @@ public class Family {
 
 	public void setToDate(LocalDate to) {
 		this.toDate = to;
+	}
+
+	public int getLapse() {
+		return lapse;
+	}
+
+	public void setLapse(int lapse) {
+		this.lapse = lapse;
 	}
 
 	public double getReservation() {
@@ -196,6 +208,14 @@ public class Family {
 		this.sspToDate.set(sspToDate);
 	}
 	
+	public String getSipLapse() {
+		return sipLapse.get();
+	}
+
+	public void setSipLapse(String sipLapse) {
+		this.sipLapse.set(sipLapse);
+	}
+	
 	public double getSspReservation() {
 		return sspReservation.get();
 	}
@@ -211,13 +231,21 @@ public class Family {
 	public void setSspHouse(String sspHouse) {
 		this.sspHouse.set(sspHouse);
 	}
-	
+
+
 	@Override
 	public String toString() {
-		return "Backup Fecha y hora= "+ LocalDateTime.now() +", Family [id=" + id + ", lastname=" + lastname + ", address=" + address + ", telephone=" + telephone
+		return "Backup Fecha y hora= "+ LocalDateTime.now() +"Family [id=" + id + ", lastname=" + lastname + ", address=" + address + ", telephone=" + telephone
 				+ ", cbu=" + cbu + ", quantity=" + quantity + ", fromDate=" + fromDate + ", toDate=" + toDate
-				+ ", reservation=" + reservation + "]";
+				+ ", lapse=" + lapse + ", reservation=" + reservation + "]";
 	}
+	
+//	@Override
+//	public String toString() {
+//		return "Backup Fecha y hora= "+ LocalDateTime.now() +", Family [id=" + id + ", lastname=" + lastname + ", address=" + address + ", telephone=" + telephone
+//				+ ", cbu=" + cbu + ", quantity=" + quantity + ", fromDate=" + fromDate + ", toDate=" + toDate
+//				+ ", reservation=" + reservation + "]";
+//	}
 
 
 }

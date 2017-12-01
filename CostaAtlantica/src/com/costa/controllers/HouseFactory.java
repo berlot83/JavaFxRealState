@@ -42,12 +42,12 @@ public class HouseFactory implements ITransactions<House, Family>, IConnection {
 
 		boolean inserted = false;
 
-		//Period lapse = Period.between(fromDate, toDate) ;
-		
+		Period lapse = Period.between(fromDate, toDate);
+		String lapseResult = "Años: "+lapse.getYears()+", Meses: "+lapse.getMonths()+", Días: "+lapse.getDays();
 		
 		try {
 			connection = getConnection();
-			String sql = "INSERT INTO families(lastname, address, telephone, cbu, quantity, fromDate, toDate,reservation, id_house) VALUES(?,?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO families(lastname, address, telephone, cbu, quantity, fromDate, toDate, lapse, reservation, id_house) VALUES(?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, lastname);
 			ps.setString(2, address);
@@ -56,8 +56,9 @@ public class HouseFactory implements ITransactions<House, Family>, IConnection {
 			ps.setInt(5, quantity);
 			ps.setString(6, fromDate.toString());
 			ps.setString(7, toDate.toString());
-			ps.setDouble(8, reservation);
-			ps.setString(9, idHouse);
+			ps.setString(8, lapseResult);
+			ps.setDouble(9, reservation);
+			ps.setString(10, idHouse);
 			ps.execute();
 			ps.close();
 			closeConnection();
@@ -75,9 +76,10 @@ public class HouseFactory implements ITransactions<House, Family>, IConnection {
 		HouseFactory hf = new HouseFactory();
 		hf.getAllRepair();
 		
-		LocalDate l1 = LocalDate.now();
-		LocalDate l2 = LocalDate.from(LocalDate.of(2017, 12 , 25));
+		LocalDate l1 = LocalDate.of(2017, 10, 30);
+		LocalDate l2 = LocalDate.of(2017, 12 , 10);
 		Period p = Period.between(l1, l2);
+		System.out.println(p.getDays());
 		System.out.println(p.getYears()+", "+p.getMonths()+", "+p.getDays());
 
 	}
@@ -89,14 +91,14 @@ public class HouseFactory implements ITransactions<House, Family>, IConnection {
 			connection = getConnection();
 
 			Statement st;
-			String sql = "SELECT id, lastname, address, telephone, cbu, quantity, fromDate, toDate, reservation, id_house FROM families";
+			String sql = "SELECT id, lastname, address, telephone, cbu, quantity, fromDate, toDate, lapse, reservation, id_house FROM families";
 			st = connection.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 
 			while (rs.next()) {
 				list.add(new Family(rs.getInt("id"), rs.getString("lastname"), rs.getString("address"),
 						rs.getString("telephone"), rs.getString("cbu"), rs.getInt("quantity"), rs.getString("fromDate"),
-						rs.getString("toDate"), rs.getDouble("reservation"), rs.getString("id_house")));
+						rs.getString("toDate"), rs.getString("lapse"), rs.getDouble("reservation"), rs.getString("id_house")));
 			}
 		} catch (Exception error) {
 			error.printStackTrace();
